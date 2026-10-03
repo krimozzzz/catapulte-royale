@@ -1,0 +1,19 @@
+{
+  "name": "Catapulte Royale II",
+  "short_name": "Catapulte II",
+  "description": "Jeu de siège 2D : 64 niveaux, 8 mondes, 4 engins de siège et 21 munitions.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "id": "./",
+  "display": "fullscreen",
+  "orientation": "any",
+  "background_color": "#0c0a14",
+  "theme_color": "#0c0a14",
+  "lang": "fr",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
