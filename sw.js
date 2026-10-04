@@ -1,5 +1,5 @@
 /* Service worker : le jeu reste jouable hors ligne une fois ouvert */
-const CACHE = 'catapulte-royale-f3e8c8e2f0';
+const CACHE = 'catapulte-royale-a9543c4ee7';
 const ASSETS = ["./","./index.html","./manifest.webmanifest","./icon.svg","./icons/apple-touch-icon.png","./icons/icon-192.png","./icons/icon-512.png","./icons/maskable-512.png"];
 
 self.addEventListener('install', (e) => {

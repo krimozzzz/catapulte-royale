@@ -386,6 +386,13 @@ body:not(.pad) .foot-hints { visibility: hidden; }
   .ammo-info { display: none; }
 }
 
+/* aide plein écran (iPhone) */
+.ios-help p { color: var(--ink2); font-weight: 700; line-height: 1.45; text-align: center; }
+.ios-help ol { margin: 0; padding-left: 1.4em; display: flex; flex-direction: column; gap: 0.55em; font-weight: 700; line-height: 1.35; }
+.ios-help ol small { color: var(--dim); font-weight: 700; }
+.ios-help ol .ic { width: 1.15em; height: 1.15em; vertical-align: -0.2em; fill: #6ab8ff; }
+.ios-help .ios-note { font-size: 0.85em; color: var(--dim); }
+
 /* téléphone en portrait */
 @media (orientation: portrait) and (max-width: 700px) {
   .title-foot { left: 16px; right: 16px; text-align: center; line-height: 1.5; }
@@ -423,6 +430,7 @@ body:not(.pad) .foot-hints { visibility: hidden; }
       <symbol id="i-check" viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" /></symbol>
       <symbol id="i-back" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20z" /></symbol>
       <symbol id="i-target" viewBox="0 0 24 24"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm8.94 3A9 9 0 0 0 13 3.06V1h-2v2.06A9 9 0 0 0 3.06 11H1v2h2.06A9 9 0 0 0 11 20.94V23h2v-2.06A9 9 0 0 0 20.94 13H23v-2zM12 19a7 7 0 1 1 0-14 7 7 0 0 1 0 14z" /></symbol>
+      <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 2.5l4.2 4.2-1.4 1.4L13 6.3V15h-2V6.3L9.2 8.1 7.8 6.7zM5 10h4v2H6v8h12v-8h-3v-2h4a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V11a1 1 0 0 1 1-1z" /></symbol>
       <symbol id="i-full" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7zm-2-4h2V7h3V5H5zm12 7h-3v2h5v-5h-2zM14 5v2h3v3h2V5z" /></symbol>
       <symbol id="i-skull" viewBox="0 0 24 24"><path d="M12 2a9 9 0 0 0-9 9c0 3 1.5 5.5 4 7v3h3v-2h4v2h3v-3c2.5-1.5 4-4 4-7a9 9 0 0 0-9-9zm-3.5 8a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm7 0a2 2 0 1 1 0 4 2 2 0 0 1 0-4z" /></symbol>
       <symbol id="i-cal" viewBox="0 0 24 24"><path d="M7 2h2v2h6V2h2v2h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3zM5 9v10h14V9zm2 2h4v4H7z" /></symbol>
@@ -596,6 +604,22 @@ body:not(.pad) .foot-hints { visibility: hidden; }
           <button class="mbtn" id="pFull" data-nav><svg class="ic"><use href="#i-full" /></svg><b>Plein écran</b></button>
           <button class="mbtn" id="pSettings" data-nav><svg class="ic"><use href="#i-gear" /></svg><b>Options</b></button>
           <button class="mbtn" id="pQuit" data-nav><svg class="ic"><use href="#i-map" /></svg><b>Quitter le niveau</b></button>
+        </div>
+      </section>
+
+      <!-- Plein écran sur iPhone : Safari ne le permet pas, on passe par l'écran d'accueil -->
+      <section id="scr-iosfs" class="screen modal">
+        <div class="modal-card glass ios-help">
+          <h2>Plein écran</h2>
+          <p>Sur iPhone, Safari ne permet pas le plein écran aux jeux. Installez le jeu sur l'écran d'accueil : il s'ouvrira en plein écran, comme une vraie application.</p>
+          <ol>
+            <li>Touchez <b>Partager</b> <svg class="ic"><use href="#i-share" /></svg> dans Safari <small>(parfois dans le menu « ··· »)</small></li>
+            <li>Choisissez <b>Sur l'écran d'accueil</b></li>
+            <li>Laissez <b>Ouvrir en tant qu'app web</b> activé, puis touchez <b>Ajouter</b></li>
+            <li>Lancez le jeu depuis sa nouvelle icône</li>
+          </ol>
+          <p class="ios-note">La progression faite dans Safari ne suit pas dans l'icône : mieux vaut installer avant de jouer.</p>
+          <button class="mbtn primary" id="iosOk" data-nav><svg class="ic"><use href="#i-check" /></svg><b>Compris</b></button>
         </div>
       </section>
 
@@ -17130,6 +17154,8 @@ const $ = (id) => document.getElementById(id);
 const STAR_SVG = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#f6c75a" stroke="#5a3a00" stroke-width="1.2" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>');
 // lancé depuis l'application Android (WebView) ?
 const IS_APP = /CatapulteRoyaleApp/.test(navigator.userAgent);
+// iPhone / iPad (les iPad récents se présentent comme un Mac tactile)
+const IS_IOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 const icon = (id, cls = '') => `<svg class="ic ${cls}"><use href="#i-${id}"/></svg>`;
 const AMMO_WORLD = {};
 const ENEMY_WORLD = {};
@@ -17184,6 +17210,7 @@ const UI = {
     on('pRestart', () => this.restart());
     on('pSettings', () => this.openSettings(true));
     on('pFull', () => this.toggleFullscreen());
+    on('iosOk', () => this.closeIosHelp());
     on('hCam', () => this.game.recenter());
     if (!this.canFullscreen()) $('pFull').remove();
     on('pQuit', () => this.quitLevel());
@@ -17241,6 +17268,8 @@ const UI = {
     $('hud').classList.toggle('hidden', !['game', 'pause', 'result'].includes(name));
     this.screen = name;
     this.shownAt = performance.now();
+    // le bandeau de début de niveau ne doit pas passer par-dessus la pause ou un autre écran
+    if (name !== 'game') $('banner').classList.add('hidden');
     this.focusEl = null;
     if (name !== 'game') this.autoFocus();
     this.renderHints();
@@ -17291,6 +17320,7 @@ const UI = {
     Music.play('title');
     this.renderMenu();
     this.show('menu', false);
+    if (this.fullscreenMode() === 'ios') setTimeout(() => this.toast('full', 'Jouer en plein écran', "Partager, puis « Sur l'écran d'accueil »", ''), 1500);
   },
 
   loadDemo() {
@@ -18054,14 +18084,38 @@ const UI = {
     this.autoFocus();
   },
 
-  canFullscreen() {
-    // version application Android : déjà en plein écran immersif
-    if (IS_APP) return false;
+  /* Plein écran : 'api' (navigateur), 'ios' (iPhone : il faut passer par l'écran d'accueil),
+     null (déjà en plein écran : application Android ou icône de l'écran d'accueil) */
+  fullscreenMode() {
+    if (IS_APP) return null;
+    const mm = (q) => !!(window.matchMedia && window.matchMedia(q).matches);
+    if (navigator.standalone === true || mm('(display-mode: standalone)') || mm('(display-mode: fullscreen)')) return null;
     const el = document.documentElement;
-    return !!(el.requestFullscreen || el.webkitRequestFullscreen);
+    if (el.requestFullscreen || el.webkitRequestFullscreen) return 'api';
+    let framed = true;
+    try {
+      framed = window.self !== window.top;
+    } catch (e) {
+      /* cadre d'un autre site */
+    }
+    return IS_IOS && !framed ? 'ios' : null;
+  },
+
+  canFullscreen() {
+    return !!this.fullscreenMode();
+  },
+
+  showIosHelp() {
+    if (this.screen !== 'iosfs') this.iosFrom = this.screen;
+    this.show('iosfs', false);
+  },
+
+  closeIosHelp() {
+    this.show(this.iosFrom || 'menu', false);
   },
 
   toggleFullscreen() {
+    if (this.fullscreenMode() === 'ios') return this.showIosHelp();
     const d = document, el = d.documentElement;
     try {
       if (!(d.fullscreenElement || d.webkitFullscreenElement)) {
@@ -18218,6 +18272,7 @@ const UI = {
   },
 
   escape() {
+    if (this.screen === 'iosfs') return this.closeIosHelp();
     if (this.screen === 'pause') return this.resume();
     if (this.screen === 'result' || this.screen === 'story' || this.screen === 'menu') return;
     Sound.play('back');
